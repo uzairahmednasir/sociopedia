@@ -7,7 +7,7 @@ import FriendListWidget from "scenes/widgets/FriendListWidget";
 import MyPostWidget from "scenes/widgets/MyPostWidget";
 import PostsWidget from "scenes/widgets/PostsWidget";
 import UserWidget from "scenes/widgets/UserWidget";
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL } from "config";
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);

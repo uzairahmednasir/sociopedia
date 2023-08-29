@@ -4,7 +4,7 @@ import WidgetWrapper from "components/WidgetWrapper";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setFriends } from "state";
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL } from "config";
 
 const FriendListWidget = ({ userId }) => {
   const dispatch = useDispatch();

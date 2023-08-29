@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL } from "config";
 
 const UserImage = ({ image, size = "60px" }) => {
   return (
