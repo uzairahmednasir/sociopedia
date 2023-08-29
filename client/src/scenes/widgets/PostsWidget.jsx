@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "state";
 import PostWidget from "./PostWidget";
+import { API_BASE_URL } from "../config";
 
 const PostsWidget = ({ userId, isProfile = false }) => {
   const dispatch = useDispatch();
@@ -9,7 +10,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
   const token = useSelector((state) => state.token);
 
   const getPosts = async () => {
-    const response = await fetch("http://localhost:3001/posts", {
+    const response = await fetch(`${API_BASE_URL}/posts`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -18,13 +19,10 @@ const PostsWidget = ({ userId, isProfile = false }) => {
   };
 
   const getUserPosts = async () => {
-    const response = await fetch(
-      `http://localhost:3001/posts/${userId}/posts`,
-      {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
+    const response = await fetch(`${API_BASE_URL}/posts/${userId}/posts`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    });
     const data = await response.json();
     dispatch(setPosts({ posts: data }));
   };

@@ -4,6 +4,7 @@ import WidgetWrapper from "components/WidgetWrapper";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setFriends } from "state";
+import { API_BASE_URL } from "../config";
 
 const FriendListWidget = ({ userId }) => {
   const dispatch = useDispatch();
@@ -12,13 +13,10 @@ const FriendListWidget = ({ userId }) => {
   const friends = useSelector((state) => state.user.friends);
 
   const getFriends = async () => {
-    const response = await fetch(
-      `http://localhost:3001/users/${userId}/friends`,
-      {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
+    const response = await fetch(`${API_BASE_URL}/users/${userId}/friends`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    });
     const data = await response.json();
     dispatch(setFriends({ friends: data }));
   };
