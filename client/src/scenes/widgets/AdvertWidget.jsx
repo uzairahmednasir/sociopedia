@@ -21,7 +21,7 @@ const AdvertWidget = () => {
         width="100%"
         height="auto"
         alt="advert"
-        src={`${API_BASE_URL}/assets/info4.jpeg`}
+        src={`https://i.ibb.co/sQM7TMB/info4.jpg`}
         style={{ borderRadius: "0.75rem", margin: "0.75rem 0" }}
       />
       <FlexBetween>
