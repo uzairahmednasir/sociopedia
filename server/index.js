@@ -34,19 +34,21 @@ app.use(cors());
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 /* FILE STORAGE */
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "public/assets");
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  },
-});
-const upload = multer({ storage });
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "public/assets");
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, file.originalname);
+//   },
+// });
+// const upload = multer({ storage });
 
 /* ROUTES WITH FILES */
-app.post("/auth/register", upload.single("picture"), register);
-app.post("/posts", verifyToken, upload.single("picture"), createPost);
+// upload.single("picture"),  to be added as middleware in /auth/register route handler incase there is need for localstorage
+app.post("/auth/register", register);
+// upload.single("picture"),  to be added as middlware in /posts route handler incase there is need for localstorage
+app.post("/posts", verifyToken, createPost);
 
 /* ROUTES */
 app.use("/auth", authRoutes);

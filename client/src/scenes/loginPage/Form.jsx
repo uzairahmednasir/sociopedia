@@ -57,22 +57,47 @@ const Form = () => {
   const isRegister = pageType === "register";
 
   const register = async (values, onSubmitProps) => {
-    // this allows us to send form info with image
-    const formData = new FormData();
-    for (let value in values) {
-      formData.append(value, values[value]);
-    }
-    formData.append("picturePath", values.picture.name);
+    try {
+      // this allows us to send form info with image
+      const formData = new FormData();
+      for (let value in values) {
+        if (value === "picture") {
+          // Append the image file to the form data
+          formData.append("image", values.picture);
+        } else {
+          formData.append(value, values[value]);
+        }
+      }
+      const imgbbResponse = await fetch(
+        "https://api.imgbb.com/1/upload?key=fb8648ea4f428417cf47c751d5db2070",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
-    const savedUserResponse = await fetch(`${API_BASE_URL}/auth/register`, {
-      method: "POST",
-      body: formData,
-    });
-    const savedUser = await savedUserResponse.json();
-    onSubmitProps.resetForm();
+      const imgbbData = await imgbbResponse.json();
+      const imageUrl = imgbbData.data.url;
 
-    if (savedUser) {
-      setPageType("login");
+      // update the formData with new picturePath
+      const newFormData = {
+        ...values,
+        picturePath: imageUrl,
+      };
+      // Now, use `imageUrl` in your API call to save the user data with the image URL.
+      const savedUserResponse = await fetch(`${API_BASE_URL}/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newFormData),
+      });
+      const savedUser = await savedUserResponse.json();
+      onSubmitProps.resetForm();
+
+      if (savedUser) {
+        setPageType("login");
+      }
+    } catch (error) {
+      console.error("Error uploading image to ImgBB:", error);
     }
   };
 
@@ -85,6 +110,7 @@ const Form = () => {
     const loggedIn = await loggedInResponse.json();
     onSubmitProps.resetForm();
     if (loggedIn) {
+      console.log(loggedIn);
       dispatch(
         setLogin({
           user: loggedIn.user,

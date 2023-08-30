@@ -39,23 +39,49 @@ const MyPostWidget = ({ picturePath }) => {
   const medium = palette.neutral.medium;
 
   const handlePost = async () => {
-    const formData = new FormData();
-    formData.append("userId", _id);
-    formData.append("description", post);
-    if (image) {
-      formData.append("picture", image);
-      formData.append("picturePath", image.name);
-    }
+    try {
+      const formData = new FormData();
+      formData.append("userId", _id);
+      formData.append("description", post);
+      if (image) {
+        // formData.append("picture", image);
+        // formData.append("picturePath", image.name);
+        formData.append("image", image);
+      }
 
-    const response = await fetch(`${API_BASE_URL}/posts`, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
-      body: formData,
-    });
-    const posts = await response.json();
-    dispatch(setPosts({ posts }));
-    setImage(null);
-    setPost("");
+      const imgbbResponse = await fetch(
+        "https://api.imgbb.com/1/upload?key=fb8648ea4f428417cf47c751d5db2070",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const imgbbData = await imgbbResponse.json();
+      const imageUrl = imgbbData.data.url;
+      console.log(imgbbData);
+      // update the formData with new picturePath
+      const newFormData = {
+        ...Object.fromEntries(formData),
+        picturePath: imageUrl,
+      };
+      // Now, use `imageUrl` in your API call to save the user data with the image URL.
+      const response = await fetch(`${API_BASE_URL}/posts`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newFormData),
+      });
+      const posts = await response.json();
+      console.log(posts);
+      dispatch(setPosts({ posts }));
+      setImage(null);
+      setPost("");
+    } catch (err) {
+      console.error("Error posting:", err);
+    }
   };
 
   return (
