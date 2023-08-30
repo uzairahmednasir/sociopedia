@@ -48,9 +48,9 @@ const MyPostWidget = ({ picturePath }) => {
         // formData.append("picturePath", image.name);
         formData.append("image", image);
       }
-
+      const imgbbKey = process.env.REACT_APP_IMGBB_API_KEY;
       const imgbbResponse = await fetch(
-        "https://api.imgbb.com/1/upload?key=fb8648ea4f428417cf47c751d5db2070",
+        `https://api.imgbb.com/1/upload?key=${imgbbKey}`,
         {
           method: "POST",
           body: formData,
