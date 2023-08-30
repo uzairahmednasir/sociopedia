@@ -59,7 +59,6 @@ const MyPostWidget = ({ picturePath }) => {
 
       const imgbbData = await imgbbResponse.json();
       const imageUrl = imgbbData.data.url;
-      console.log(imgbbData);
       // update the formData with new picturePath
       const newFormData = {
         ...Object.fromEntries(formData),
@@ -75,7 +74,6 @@ const MyPostWidget = ({ picturePath }) => {
         body: JSON.stringify(newFormData),
       });
       const posts = await response.json();
-      console.log(posts);
       dispatch(setPosts({ posts }));
       setImage(null);
       setPost("");
