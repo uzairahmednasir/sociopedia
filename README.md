@@ -2,14 +2,11 @@
 Full Stack Social Media Web App built with MERN
 
 ## Technologies used:
-- React
-- Redux with Persist
-- Material UI
-- Nodejs
-- Expressjs
-- MongoDB
-- Vercel (Front-End Deployment)
-- DigitalOcean (API Deployment)
+[![My Skills](https://skillicons.dev/icons?i=react,redux,materialui,nodejs,express,mongodb,vercel)](https://skillicons.dev)
+
+## Deployment:
+- [Vercel Front-End Deployment](https://sociopedia-app.vercel.app)
+- [DigitalOcean API Deployment](https://urchin-app-v2nci.ondigitalocean.app)
 
 ## Snapshot:
 <img src="dark_theme_ss.png" width="1200">
