@@ -1,6 +1,16 @@
 # Sociopedia
 Full Stack Social Media Web App built with MERN
 
+## Technologies used:
+- React
+- Redux with Persist
+- Material UI
+- Nodejs
+- Expressjs
+- MongoDB
+- Vercel (Front-End Deployment)
+- DigitalOcean (API Deployment)
+
 ## Snapshot:
 <img src="dark_theme_ss.png" width="1200">
 
