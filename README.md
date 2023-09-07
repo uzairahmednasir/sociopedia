@@ -17,4 +17,4 @@ Full Stack Social Media Web App built with MERN
 
 ## Acknowledgments
 
-This project was created with the help of a fantastic YouTube tutorial by [EdRoh](https://youtu.be/K8YELRmUb5o?si=A-LMMf4fiOH9d71F). I highly recommend checking out his tutorial if you're interested in learning more about building similar projects.
+This project was created with the help of a [fantastic YouTube tutorial by EdRoh](https://youtu.be/K8YELRmUb5o?si=A-LMMf4fiOH9d71F). I highly recommend checking out his tutorial if you're interested in learning more about building similar projects.
